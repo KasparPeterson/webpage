@@ -19,18 +19,29 @@ def hello():
 
 @app.route("/weather", methods = ['POST'])
 def weather():
-    json_request = request.json
-    #text = 'This is a sample response from your webhook!'
-    text = json.dumps(json_request)
+    text = get_response_text(request.json)
     json_response = json.dumps({"speech": text, "displayText": text})
     resp = Response(json_response)
     resp.headers['Content-Type'] = 'application/json'
     return resp
 
 
-weather_api_endpoint = 'api.worldweatheronline.com'
-weather_api_key = 'ac171efc8a0540f7a6f120039180102'
+def get_response_text(json_request):
+    parameters = json_request['result']['parameters']
+    date = parameters['date']
+    geo_city = parameters['geo-city']
+    return get_text(date, geo_city)
 
+
+def get_text(date, geo_city):
+    if date and geo_city:
+        return "It's climate warming in " + geo_city + " on " + date
+    elif date:
+        return "It's really nice and warm on planet earth on " + date
+    elif geo_city:
+        return "It's warm today in " + geo_city
+    else:
+        return "It's climate warming warning warming warning...."
 
 
 if __name__ == "__main__":

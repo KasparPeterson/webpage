@@ -1,0 +1,39 @@
+{
+  "lang": "en",
+  "status": {
+    "errorType": "success",
+    "code": 200,
+    "webhookTimedOut": false
+  },
+  "timestamp": "2018-02-01T13:12:24.247Z",
+  "sessionId": "44801341-7084-428e-a4c7-00d6182c5e35",
+  "result": {
+    "parameters": {
+      "date": "",
+      "geo-city": ""
+    },
+    "contexts": [],
+    "resolvedQuery": "weather",
+    "source": "agent",
+    "score": 0.9900000095367432,
+    "speech": "",
+    "fulfillment": {
+      "messages": [
+        {
+          "speech": "Sorry I don't know the weather",
+          "type": 0
+        }
+      ],
+      "speech": "Sorry I don't know the weather"
+    },
+    "actionIncomplete": false,
+    "action": "",
+    "metadata": {
+      "intentId": "ff20b1a5-d949-403d-b4f4-a019c5ff96ab",
+      "webhookForSlotFillingUsed": "false",
+      "intentName": "weather",
+      "webhookUsed": "true"
+    }
+  },
+  "id": "ee5a43f2-32bc-460e-918b-329826227cb7"
+}
