@@ -15,7 +15,7 @@ def hello():
            "</center>"
     return html.format()
 
-@app.route("/weather")
+@app.route("/weather", methods = ['POST'])
 def weather():
     text = 'This is a sample response from your webhook!'
     json_response = json.dumps({"speech": text, "displayText": text})
