@@ -20,10 +20,10 @@ def hello():
 @app.route("/weather", methods = ['POST'])
 def weather():
     json_request = request.json
-
-    text = 'This is a sample response from your webhook!'
+    #text = 'This is a sample response from your webhook!'
+    text = json.dumps(json_request)
     json_response = json.dumps({"speech": text, "displayText": text})
-    resp = Response(json.dumps(json_request))
+    resp = Response(json_response)
     resp.headers['Content-Type'] = 'application/json'
     return resp
 
