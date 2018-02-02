@@ -2,6 +2,7 @@ from flask import Flask
 from flask import Response
 from flask import request
 import json
+import requests
 
 app = Flask(__name__)
 
@@ -34,14 +35,29 @@ def get_response_text(json_request):
 
 
 def get_text(date, geo_city):
-    if date and geo_city:
-        return "It's climate warming in " + geo_city + " on " + date
-    elif date:
-        return "It's really nice and warm on planet earth on " + date
-    elif geo_city:
-        return "It's warm today in " + geo_city
-    else:
-        return "It's climate warming warning warming warning...."
+    json_response = fetch_weather_info(date, geo_city)
+    weather = json_response['data']['weather'][0]
+    return 'The weather in ' + geo_city + ' on ' + date + ' is from ' + weather['mintempC'] + ' to ' \
+           + weather['maxtempC'] + ' degree celsius.'
+
+
+host = 'http://api.worldweatheronline.com'
+end_point = '/premium/v1/weather.ashx'
+api_key = 'ac171efc8a0540f7a6f120039180102'
+
+
+def fetch_weather_info(date, geo_city):
+    url = host + end_point
+    querystring = {
+        "format": "json",
+        "num_of_days": "1",
+        "q": geo_city,
+        "date": date,
+        "key": api_key
+    }
+
+    response = requests.request("GET", url, params=querystring)
+    return json.loads(response.text)
 
 
 if __name__ == "__main__":
