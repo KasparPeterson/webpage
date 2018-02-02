@@ -37,7 +37,13 @@ def get_response_text(json_request):
 def get_text(date, geo_city):
     json_response = fetch_weather_info(date, geo_city)
     weather = json_response['data']['weather'][0]
-    return 'The weather in ' + geo_city + ' on ' + date + ' is from ' + weather['mintempC'] + ' to ' \
+
+    if not date:
+        date = 'today'
+    else:
+        date = 'on ' + date
+
+    return 'The weather in ' + geo_city + ' ' + date + ' is from ' + weather['mintempC'] + ' to ' \
            + weather['maxtempC'] + ' degree celsius.'
 
 
